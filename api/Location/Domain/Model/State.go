@@ -4,7 +4,7 @@ type State struct {
 	id           string
 	name         string
 	abbreviation string
-	country      string
+	country      *Country
 }
 
 func (s *State) ID() string {
@@ -15,7 +15,7 @@ func (s *State) Name() string {
 	return s.name
 }
 
-func (s *State) Country() string {
+func (s *State) Country() *Country {
 	return s.country
 }
 

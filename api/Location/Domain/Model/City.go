@@ -3,7 +3,7 @@ package Location
 type City struct {
 	id           string
 	name         string
-	state        string
+	state        *State
 	cityIbgeCode string
 }
 
@@ -15,7 +15,7 @@ func (c *City) Name() string {
 	return c.name
 }
 
-func (c *City) State() string {
+func (c *City) State() *State {
 	return c.state
 }
 

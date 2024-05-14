@@ -12,7 +12,7 @@ type Event struct {
 	date        time.Time
 	description string
 	link        string
-	city        Location.City
+	city        *Location.City
 }
 
 func NewEvent(city Location.City, date time.Time, description, title, link string) *Event {
@@ -22,7 +22,7 @@ func NewEvent(city Location.City, date time.Time, description, title, link strin
 		date:        date,
 		description: description,
 		link:        link,
-		city:        city,
+		city:        &city,
 	}
 }
 
@@ -46,6 +46,6 @@ func (e *Event) Link() string {
 	return e.link
 }
 
-func (e *Event) City() Location.City {
+func (e *Event) City() *Location.City {
 	return e.city
 }
