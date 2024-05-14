@@ -9,20 +9,15 @@ type Event struct {
 	id          string
 	date        time.Time
 	description string
-	location    string
 	link        string
-	eventType   string
 }
 
 func NewEvent(date time.Time, description, location, link, eventType string) *Event {
-
 	return &Event{
 		id:          Util.GenarateUUid(),
 		date:        date,
 		description: description,
-		location:    location,
 		link:        link,
-		eventType:   eventType,
 	}
 }
 
@@ -36,10 +31,6 @@ func (e *Event) Date() time.Time {
 
 func (e *Event) Description() string {
 	return e.description
-}
-
-func (e *Event) Location() string {
-	return e.location
 }
 
 func (e *Event) Link() string {
