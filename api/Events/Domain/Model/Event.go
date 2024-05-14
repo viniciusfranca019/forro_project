@@ -1,7 +1,7 @@
 package Model
 
 import (
-	"github.com/google/uuid"
+	"forro_project/packages/Util"
 	"time"
 )
 
@@ -15,14 +15,9 @@ type Event struct {
 }
 
 func NewEvent(date time.Time, description, location, link, eventType string) *Event {
-	id, err := uuid.NewV7()
-
-	if err != nil {
-		panic("error on new id")
-	}
 
 	return &Event{
-		id:          id.String(),
+		id:          Util.GenarateUUid(),
 		date:        date,
 		description: description,
 		location:    location,
