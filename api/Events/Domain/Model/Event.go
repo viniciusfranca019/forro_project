@@ -6,18 +6,23 @@ import (
 )
 
 type Event struct {
-	id          string    // ID of the event (UUID)
-	date        time.Time // Date and time of the event
-	description string    // Description of the event
-	location    string    // Geographic coordinates of the event
-	link        string    // Link related to the event
-	eventType   string    // Type of the event
+	id          string
+	date        time.Time
+	description string
+	location    string
+	link        string
+	eventType   string
 }
 
-// NewEvent creates a new event with provided values
 func NewEvent(date time.Time, description, location, link, eventType string) *Event {
+	id, err := uuid.NewV7()
+
+	if err != nil {
+		panic("error on new id")
+	}
+
 	return &Event{
-		id:          uuid.New().String(), // Generate UUID for ID
+		id:          id.String(),
 		date:        date,
 		description: description,
 		location:    location,
