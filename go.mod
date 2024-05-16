@@ -1,6 +1,6 @@
 module forro_project
 
-go 1.21.6
+go 1.22.3
 
 require (
 	github.com/bytedance/sonic v1.11.6 // indirect

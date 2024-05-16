@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev@123456
+      POSTGRES_DB: dev
+    networks:
+      - backend
+
+networks:
+  backend:
