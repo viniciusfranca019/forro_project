@@ -1,1 +1,6 @@
 .idea
+.docker/prd
+.docker/dev/docker-compose.yml
+.docker/dev/Dockerfile
+Makefile
+.dockerignore
