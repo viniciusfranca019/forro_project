@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somos Forró</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+<header>
+    <h1>Somos Forró</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Eventos</h2>
+    <section class="filter-section">
+        <section class="filter">
+            <h2>Filtro</h2>
+            <form>
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data">
+                <button type="submit">Add Evento</button>
+            </form>
+        </section>
+    </section>
+    <section>
+        <ul class="card-list">
+            {{ range .eventos }}
+            <li class="card-item">
+                <h3>{{ .Title }}</h3>
+                <p>Data: {{ .Data }}</p>
+                <p>Cidade: {{ .Cidade }}</p>
+                <p>Descrição: {{ .Descricao }}</p>
+            </li>
+            {{ end }}
+        </ul>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2023 Somos Forró</p>
+</footer>
+</body>
+</html>
