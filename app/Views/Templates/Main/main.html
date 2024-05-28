@@ -23,11 +23,15 @@
         <section class="filter">
             <h2>Filtro</h2>
             <form>
-                <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data">
-                <button type="submit">Add Evento</button>
+                <div>
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade">
+                </div>
+                <div>
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data">
+                </div>
+                <button type="submit">Filtrar Eventos</button>
             </form>
         </section>
     </section>
@@ -35,10 +39,17 @@
         <ul class="card-list">
             {{ range .eventos }}
             <li class="card-item">
-                <h3>{{ .Title }}</h3>
-                <p>Data: {{ .Data }}</p>
-                <p>Cidade: {{ .Cidade }}</p>
-                <p>Descrição: {{ .Descricao }}</p>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">{{ .Title }}</h3>
+                        <p class="card-info">Data: {{ .Data }}</p>
+                        <p class="card-info">Cidade: {{ .Cidade }}</p>
+                        <p class="card-description">Descrição: {{ .Descricao }}</p>
+                        <div class="card-button-container">
+                            <a href="#" class="card-button">Ver Evento</a>
+                        </div>
+                    </div>
+                </div>
             </li>
             {{ end }}
         </ul>
