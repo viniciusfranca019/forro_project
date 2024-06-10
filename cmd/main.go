@@ -15,20 +15,28 @@ type Evento struct {
 }
 
 func main() {
-	r := gin.Default()
+	engine := gin.Default()
 
-	// Load HTML templates from app/Views/Templates/Main
+	engine = setupApp(engine)
+
+	engine.Run(":8080")
+}
+
+func setupApp(engine *gin.Engine) *gin.Engine {
 	t, err := template.ParseFiles("app/Views/Templates/Main/main.html")
 	if err != nil {
 		panic(err)
 	}
 
-	r.SetHTMLTemplate(t)
+	engine.SetHTMLTemplate(t)
+	engine.StaticFS("/static", http.Dir("app/Views/Templates/Main"))
 
-	// Serve static files from app/Views/Templates/Main
-	r.StaticFS("/static", http.Dir("app/Views/Templates/Main"))
+	return setupAppRouters(engine)
+}
 
-	r.GET("/", func(c *gin.Context) {
+func setupAppRouters(engine *gin.Engine) *gin.Engine {
+	appGroup := engine.Group("/app")
+	appGroup.GET("", func(c *gin.Context) {
 		eventos := []Evento{
 			{Title: "Evento 1", Data: "2023-02-20", Cidade: "São Paulo", Descricao: "Lorem ipsum dolor sit ameadadasdt."},
 			{Title: "Evento 2", Data: "2023-03-15", Cidade: "Rio de Janeiro", Descricao: "Lorem ipsum dolor sit amet."},
@@ -69,5 +77,5 @@ func main() {
 		c.Header("Expires", "0")
 	})
 
-	r.Run(":8080")
+	return engine
 }
