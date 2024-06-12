@@ -3,11 +3,12 @@ package Event
 import (
 	Location "forro_project/api/Location/Domain/Model"
 	"forro_project/packages/Util"
+	"github.com/google/uuid"
 	"time"
 )
 
 type Event struct {
-	id          string
+	id          uuid.UUID
 	title       string
 	date        time.Time
 	description string
@@ -30,7 +31,7 @@ func (e *Event) Title() string {
 	return e.title
 }
 
-func (e *Event) ID() string {
+func (e *Event) ID() uuid.UUID {
 	return e.id
 }
 

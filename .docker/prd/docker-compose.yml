@@ -1,24 +1,35 @@
-version: "3"
-
+version: "3.8"
 services:
-  go-app:
+  go_app:
+    container_name: go_app
     build:
       context: ../..
       dockerfile: .docker/prd/Dockerfile
     ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
+      - ${APP_PORT}:${APP_PORT}
+    restart: always
+    volumes:
+      - ./src:/app/src
     networks:
-      - backend
-  postgres:
-    image: postgres:13
+      - boilerplate_network
     environment:
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: dev@123456
-      POSTGRES_DB: dev
+      - ENVIRONMENT=Dev
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    restart: always
+    tty: true
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data/
     networks:
-      - backend
-
+      - boilerplate_network
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
 networks:
-  backend:
+  boilerplate_network:
+    name: boilerplate_network
+    driver: bridge

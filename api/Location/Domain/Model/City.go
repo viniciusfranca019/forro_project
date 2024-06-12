@@ -1,13 +1,27 @@
 package Location
 
+import (
+	"forro_project/packages/Util"
+	"github.com/google/uuid"
+)
+
 type City struct {
-	id           string
-	name         string
+	id           uuid.UUID
 	state        *State
+	name         string
 	cityIbgeCode string
 }
 
-func (c *City) ID() string {
+func NewCity(state *State, name string, cityIbgeCode string) *City {
+	return &City{
+		id:           Util.GenarateUUid(),
+		name:         name,
+		cityIbgeCode: cityIbgeCode,
+		state:        state,
+	}
+}
+
+func (c *City) ID() uuid.UUID {
 	return c.id
 }
 

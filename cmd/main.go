@@ -1,10 +1,12 @@
 package main
 
 import (
+	Location "forro_project/api/Location/Domain/Model"
+	"github.com/gin-gonic/gin"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"html/template"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
 )
 
 type Evento struct {
@@ -15,10 +17,27 @@ type Evento struct {
 }
 
 func main() {
+	dsn := "user=root password=root dbname=database host=postgres port=5432 sslmode=disable TimeZone=UTC"
+	db, err := gorm.Open(
+		postgres.Open(dsn),
+		&gorm.Config{},
+	)
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	// Auto migrate the schema
+	db.AutoMigrate(
+		&Location.State{},
+		&Location.City{},
+	)
+
+	startServer()
+}
+
+func startServer() {
 	engine := gin.Default()
-
 	engine = setupApp(engine)
-
 	engine.Run(":8080")
 }
 
