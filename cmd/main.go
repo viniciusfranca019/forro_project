@@ -27,10 +27,7 @@ func main() {
 	}
 
 	// Auto migrate the schema
-	db.AutoMigrate(
-		&Location.State{},
-		&Location.City{},
-	)
+	db.AutoMigrate(&Location.Country{}, &Location.State{}, &Location.City{}, &Location.Address{})
 
 	startServer()
 }

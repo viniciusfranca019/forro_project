@@ -1,32 +1,19 @@
 package Location
 
 import (
-	"forro_project/packages/Util"
-	"github.com/google/uuid"
+	"forro_project/api/Base/Domain/Model"
 )
 
 type Address struct {
-	id        uuid.UUID
-	city      *City
-	reference string
+	Model.Model
+	Reference string `gorm:"type:varchar(255);not null"`
+	CityID    string `gorm:"type:uuid;not null"`
+	City      *City  `gorm:"foreignKey:CityID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
 func newAddress(city *City, reference string) *Address {
 	return &Address{
-		id:        Util.GenarateUUid(),
-		reference: reference,
-		city:      city,
+		Reference: reference,
+		City:      city,
 	}
-}
-
-func (address *Address) ID() uuid.UUID {
-	return address.id
-}
-
-func (address *Address) Reference() string {
-	return address.reference
-}
-
-func (address *Address) City() *City {
-	return address.city
 }

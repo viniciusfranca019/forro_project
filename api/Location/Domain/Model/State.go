@@ -1,38 +1,22 @@
 package Location
 
 import (
-	"forro_project/packages/Util"
-	"github.com/google/uuid"
+	"forro_project/api/Base/Domain/Model"
 )
 
 type State struct {
-	id           uuid.UUID
-	country      *Country
-	name         string
-	abbreviation string
+	Model.Model
+	Name         string   `gorm:"type:varchar(100);not null"`
+	Abbreviation string   `gorm:"type:varchar(3);not null"`
+	CountryID    string   `gorm:"type:uuid;not null"`
+	Country      *Country `gorm:"foreignKey:CountryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Cities       []City   `gorm:"foreignKey:StateID"`
 }
 
 func NewState(country *Country, name string, abbreviation string) *State {
 	return &State{
-		id:           Util.GenarateUUid(),
-		country:      country,
-		name:         name,
-		abbreviation: abbreviation,
+		Country:      country,
+		Name:         name,
+		Abbreviation: abbreviation,
 	}
-}
-
-func (s *State) ID() uuid.UUID {
-	return s.id
-}
-
-func (s *State) Name() string {
-	return s.name
-}
-
-func (s *State) Country() *Country {
-	return s.country
-}
-
-func (s *State) Abbreviation() string {
-	return s.abbreviation
 }

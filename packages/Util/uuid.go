@@ -1,6 +1,8 @@
 package Util
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 func GenarateUUid() uuid.UUID {
 	id, err := uuid.NewV7()
@@ -8,6 +10,5 @@ func GenarateUUid() uuid.UUID {
 	if err != nil {
 		panic("error on new id")
 	}
-
 	return id
 }
