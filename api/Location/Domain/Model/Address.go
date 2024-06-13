@@ -5,10 +5,11 @@ import (
 )
 
 type Address struct {
-	Model.Model
+	Model.Identity
 	Reference string `gorm:"type:varchar(255);not null"`
 	CityID    string `gorm:"type:uuid;not null"`
 	City      *City  `gorm:"foreignKey:CityID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Model.TimeTrace
 }
 
 func newAddress(city *City, reference string) *Address {

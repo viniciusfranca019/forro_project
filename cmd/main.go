@@ -17,7 +17,7 @@ type Evento struct {
 }
 
 func main() {
-	dsn := "user=root password=root dbname=database host=postgres port=5432 sslmode=disable TimeZone=UTC"
+	dsn := "user=root password=root dbname=database host=localhost port=5432 sslmode=disable TimeZone=UTC"
 	db, err := gorm.Open(
 		postgres.Open(dsn),
 		&gorm.Config{},

@@ -8,8 +8,6 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     restart: always
-    volumes:
-      - ./src:/app/src
     networks:
       - boilerplate_network
     environment:
